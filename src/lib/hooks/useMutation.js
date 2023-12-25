@@ -3,7 +3,6 @@ import axiosClient from "../axiosInstance";
 
 const useMutation = ({ route, method = "POST" }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([]);
   const [status, setStatus] = useState("idle");
 
   const mutate = async (payload) => {
@@ -14,17 +13,17 @@ const useMutation = ({ route, method = "POST" }) => {
         url: route,
         data: payload,
       });
-      setData(res.data);
+
       setStatus("success");
+      return res.data;
     } catch (err) {
       setStatus("error");
+      throw err;
     }
-    setIsLoading(false);
   };
 
   return {
     isLoading,
-    data,
     status,
     mutate,
   };
