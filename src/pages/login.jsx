@@ -21,10 +21,12 @@ const Login = () => {
     route: "/visitor",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (isLoading) return;
-    if (!form.name || !form.mobile || !form.address) return;
+    if (!form.name || !form.mobile || !form.address) {
+      toast.error("Please fill all the fields.");
+      return;
+    }
     try {
       const { name, mobile, address } = form;
       const data = await mutate({
@@ -37,6 +39,7 @@ const Login = () => {
         return;
       }
       localStorage.setItem("access_token", data.token);
+      localStorage.setItem("visitor_details", JSON.stringify(data.user));
       toast.success("Successfully logged in.");
       setTimeout(() => {
         navigate("/visiting");
@@ -52,7 +55,7 @@ const Login = () => {
   }
 
   return (
-    <div className="max-w-lg mx-auto flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen">
       <section className="border-2 p-5 rounded-lg w-full">
         <div className="space-y-2">
           <Label className="text-xl" htmlFor="name">

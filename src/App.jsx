@@ -9,10 +9,12 @@ import Login from "./pages/login";
 import { Toaster } from "react-hot-toast";
 import VisitingDetails from "./pages/visiting-details";
 import Header from "./components/header/header";
+import DrinkDetails from "./pages/drink-details";
+import ThanksPage from "./pages/thanks";
 
 function App() {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-lg mx-auto">
       <Header />
       <Router>
         <Routes>
@@ -23,6 +25,22 @@ function App() {
             element={
               <AuthenticatedRoute>
                 <VisitingDetails />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/drink"
+            element={
+              <AuthenticatedRoute>
+                <DrinkDetails />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/thanks"
+            element={
+              <AuthenticatedRoute>
+                <ThanksPage />
               </AuthenticatedRoute>
             }
           />

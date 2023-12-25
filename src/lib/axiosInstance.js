@@ -1,4 +1,5 @@
 import axios from "axios";
+import { logOut } from "./utils";
 
 const API_URL = "http://localhost:8000/api/v1";
 
@@ -32,8 +33,7 @@ axiosClient.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
-      localStorage.removeItem("access_token");
-      window.location.href = "/login";
+      logOut();
     }
     return Promise.reject(error);
   }

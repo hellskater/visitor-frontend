@@ -1,13 +1,11 @@
+import { logOut } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 const Header = () => {
   const isAuthenticated = localStorage.getItem("access_token");
 
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("visiting_details");
-    localStorage.removeItem("drink_details");
-    window.location.href = "/login";
+    logOut();
   };
 
   if (!isAuthenticated) return null;

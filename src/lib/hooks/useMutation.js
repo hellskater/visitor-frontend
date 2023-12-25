@@ -15,8 +15,10 @@ const useMutation = ({ route, method = "POST" }) => {
       });
 
       setStatus("success");
+      setIsLoading(false);
       return res.data;
     } catch (err) {
+      setIsLoading(false);
       setStatus("error");
       throw err;
     }
